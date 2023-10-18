@@ -1,6 +1,9 @@
 # Build: sudo docker build -t nginx .
-# Run:   sudo docker run -it nginx
+# Run:   sudo docker run -it -p 433:433 nginx
 FROM	debian:buster
+
+# Expose ports
+EXPOSE	443
 
 # Install dependencies
 RUN		apt-get update -y
@@ -18,10 +21,10 @@ RUN		openssl req -x509 -nodes \
 # Configure nginx
 RUN		mkdir -p /var/run/nginx
 COPY	conf/nginx.conf /etc/nginx/nginx.conf
-# Copy nginx config
-
 RUN		chmod 755 /var/www/html
 RUN		chown -R www-data:www-data /var/www/html
+
+# TODO : remove this line
 COPY	conf/index.html /var/www/html/index.html
 
 CMD		["nginx", "-g", "daemon off;"]
