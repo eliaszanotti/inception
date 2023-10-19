@@ -1,0 +1,67 @@
+version: '3'
+
+networks:
+  inception:
+    name: inception
+    driver: bridge
+
+volumes:
+  wp:
+    driver: local
+    name: wp
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/goinfre/data/wordpress
+  db:
+    driver: local
+    name: db
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/goinfre/data/database
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: requirements/nginx
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on: 
+      - wordpress
+    volumes: 
+      - wp:/var/www/html
+    networks: 
+      - inception
+    restart: on-failure
+    ports: 
+      - "433:433"
+
+  mariadb:
+    container_name: mariadb
+    build:
+      context: requirements/mariadb
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes: 
+      - db:/var/lib/mysql
+    networks: 
+      - inception
+    restart: unless-stopped
+    expose: 
+      - "3306"
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: requirements/wordpress
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes: 
+      - wp:/var/www/wordpress
+    networks: 
+      - inception
+    restart: on-failure
+    expose: 
+      - "9000"
