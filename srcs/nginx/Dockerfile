@@ -1,5 +1,5 @@
-# Build: sudo docker build -t nginx .
-# Run:   sudo docker run -it -p 433:433 nginx
+# Build:	sudo docker build -t nginx .
+# Run:		sudo docker run -it -p 433:433 nginx
 FROM	debian:buster
 
 # Expose ports
