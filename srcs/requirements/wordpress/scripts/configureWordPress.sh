@@ -8,7 +8,7 @@ mkdir -p /run/php/;
 touch /run/php/php7.3-fpm.pid;
 echo -e "\e[32m[Privileges gived]\e[0m"
 
-if [ ! -f /var/www/wordpress/wp-config.php ]; then
+if [ ! -f /var/www/html/wp-config.php ]; then
 	echo "[First WordPress configuration]"
 
 	echo -e "Obtaining secret keys (WordPress API)..."
@@ -16,8 +16,8 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 	echo -e "\e[32m[API Secret keys obtained]\e[0m"
 
 	# Download WordPress
-	mkdir -p /var/www/wordpress
-	cd /var/www/wordpress
+	mkdir -p /var/www/html
+	cd /var/www/html
 	wp core download --allow-root
 
 	# Create wp-config.php
@@ -25,7 +25,7 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 						--dbuser=$SQL_USER \
 						--dbpass=$SQL_PASSWORD \
 						--dbhost=mariadb:3306 \
-						--path="/var/www/wordpress" \
+						--path="/var/www/html" \
 						--dbcharset="utf8" \
 						--dbcollate="utf8_general_ci" \
 						--allow-root
