@@ -29,3 +29,5 @@ COPY	conf/www.conf /etc/php/7.3/fpm/pool.d
 COPY	scripts/configureWordPress.sh .
 RUN		chmod +x configureWordPress.sh
 ENTRYPOINT ["./configureWordPress.sh"]
+
+CMD		["/usr/sbin/php-fpm7.3", "--nodaemonize"]
