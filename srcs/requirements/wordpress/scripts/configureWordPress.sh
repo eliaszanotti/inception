@@ -1,5 +1,4 @@
 #!/bin/bash
-# set -e
 
 echo -e "Giving privileges..."
 chown -R www-data:www-data /var/www/*;
@@ -36,3 +35,5 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 fi
 
 echo -e "\e[32m[WordPress started on :9000]\e[0m"
+
+exec "$@"
