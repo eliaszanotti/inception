@@ -26,5 +26,6 @@ RUN		chown -R www-data:www-data /var/www/html
 
 # TODO : remove this line
 COPY	conf/index.html /var/www/html/index.html
+COPY	conf/test.php /var/www/html/test.php
 
 CMD		["nginx", "-g", "daemon off;"]
