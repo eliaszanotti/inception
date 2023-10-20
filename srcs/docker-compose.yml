@@ -63,7 +63,7 @@ services:
     depends_on: 
       - mariadb
     volumes: 
-      - wp:/var/www/wordpress
+      - wp:/var/www/html
     networks: 
       - inception
     restart: on-failure
