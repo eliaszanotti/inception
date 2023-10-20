@@ -1,9 +1,8 @@
-# Build:	sudo docker build -t nginx .
-# Run:		sudo docker run -it -p 433:433 nginx
+# Version
 FROM	debian:buster
 
-# Expose ports
-EXPOSE	443
+# Open port
+EXPOSE		443
 
 # Install dependencies
 RUN		apt-get update -y
@@ -11,21 +10,13 @@ RUN		apt-get upgrade -y
 RUN		apt-get install -y nginx
 RUN		apt-get install -y openssl
 
-# Create SSL certificate
-RUN		mkdir -p /etc/nginx/ssl
-RUN		openssl req -x509 -nodes \
-		-out /etc/nginx/ssl/inception.crt \
-		-keyout /etc/nginx/ssl/inception.key \
-		-subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=ezanotti.42.fr/UID=ezanotti"
+# Copy data to the docker env
+COPY	./conf/nginx.conf /etc/nginx/sites-enabled/default
 
-# Configure nginx
-RUN		mkdir -p /var/run/nginx
-COPY	conf/nginx.conf /etc/nginx/nginx.conf
-RUN		chmod 755 /var/www/html
-RUN		chown -R www-data:www-data /var/www/html
+# Launch the configuration of Nginx
+COPY	./scripts/nginx_start.sh /var/www
+RUN		chmod +x /var/www/nginx_start.sh
+ENTRYPOINT	["/var/www/nginx_start.sh"]
 
-# TODO : remove this line
-COPY	conf/index.html /var/www/html/index.html
-COPY	conf/test.php /var/www/html/test.php
-
+# Execute Nginx
 CMD		["nginx", "-g", "daemon off;"]
