@@ -14,9 +14,9 @@ RUN		apt-get install -y openssl
 COPY	./conf/nginx.conf /etc/nginx/sites-enabled/default
 
 # Launch the configuration of Nginx
-COPY	./scripts/generateSSLCertificate.sh /var/www
-RUN		chmod +x /var/www/generateSSLCertificate.sh
-ENTRYPOINT	["/var/www/generateSSLCertificate.sh"]
+COPY	./scripts/generateSSLCertificate.sh .
+RUN		chmod +x generateSSLCertificate.sh
+ENTRYPOINT	["./generateSSLCertificate.sh"]
 
 # Execute Nginx
 CMD		["nginx", "-g", "daemon off;"]
