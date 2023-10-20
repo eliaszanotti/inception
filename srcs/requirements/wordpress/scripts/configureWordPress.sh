@@ -6,14 +6,14 @@ chown -R www-data:www-data /var/www/*;
 chown -R 755 /var/www/*;
 mkdir -p /run/php/;
 touch /run/php/php7.3-fpm.pid;
-echo -e "\033[1A\033[K\e[32m[Privileges gived]\e[0m"
+echo -e "\e[32m[Privileges gived]\e[0m"
 
 if [ ! -f /var/www/wordpress/wp-config.php ]; then
 	echo "[First WordPress configuration]"
 
 	echo -e "Obtaining secret keys (WordPress API)..."
 	wp_keys=$(curl -s "https://api.wordpress.org/secret-key/1.1/salt/")
-	echo -e "\033[1A\033[K\e[32m[API Secret keys obtained]\e[0m"
+	echo -e "\e[32m[API Secret keys obtained]\e[0m"
 
 	# Download WordPress
 	mkdir -p /var/www/wordpress
@@ -35,5 +35,3 @@ if [ ! -f /var/www/wordpress/wp-config.php ]; then
 fi
 
 echo -e "\e[32m[WordPress started on :9000]\e[0m"
-
-bash
