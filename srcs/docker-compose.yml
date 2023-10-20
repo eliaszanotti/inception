@@ -19,7 +19,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /root/data/database
+      device: /root/data/db
 
 services:
   nginx:
