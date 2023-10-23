@@ -5,18 +5,15 @@ FROM	debian:buster
 # Expose ports
 EXPOSE	3306
 
-# Install dependencies
+# Install services
 RUN		apt-get update -y
 RUN		apt-get upgrade -y
 RUN		apt-get install -y mariadb-server
 
-# Configure mariadb
-COPY	conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
+# MariaDB configuration
+COPY	conf/mariadb_conf.sh .
+RUN		chmod +x mariadb_conf.sh
 
-# Add scripts
-COPY	scripts/databaseCreationScript.sh .
-RUN		chmod +x databaseCreationScript.sh
-
-# Run mariadb script
-ENTRYPOINT	["./databaseCreationScript.sh"]
+# Start
+ENTRYPOINT	["./mariadb_conf.sh"]
 CMD		["mysqld", "--bind-address=0.0.0.0"]
