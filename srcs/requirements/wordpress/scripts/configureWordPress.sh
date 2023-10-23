@@ -1,5 +1,45 @@
 #!/bin/bash
 
+# echo -e "Giving privileges..."
+# chown -R www-data:www-data /var/www/*;
+# chown -R 755 /var/www/*;
+# mkdir -p /run/php/;
+# touch /run/php/php7.3-fpm.pid;
+# echo -e "\e[32m[Privileges gived]\e[0m"
+
+# if [ ! -f /var/www/html/wp-config.php ]; then
+# 	echo -e "\e[32m[First WordPress configuration]\e[0m"
+
+# 	# Download WordPress
+# 	mkdir -p /var/www/html
+# 	cd /var/www/html
+# 	wp core download 	--allow-root
+
+# 	# Create wp-config.php
+#     wp config create	--dbname=$WP_TITLE \
+# 						--dbuser=$WP_USER_LOGIN \
+# 						--dbpass=$WP_USER_PASSWORD \
+# 						--dbhost=mariadb:3306 \
+# 						--path="/var/www/html" \
+# 						--dbcharset="utf8" \
+# 						--dbcollate="utf8_general_ci" \
+# 						--allow-root
+#     wp core install 	--url=$DOMAIN_NAME/wordpress \
+# 						--title=$WP_TITLE \
+# 						--admin_user=$WP_ADMIN_USER \
+# 						--admin_password=$WP_ADMIN_PASSWORD \
+# 						--admin_email=$WP_ADMIN_EMAIL \
+# 						--skip-email \
+# 						--allow-root
+#     # wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root
+#     # wp theme install inspiro --activate --allow-root
+# fi
+
+# echo -e "\e[32m[WordPress started on :9000]\e[0m"
+
+# exec "$@"
+
+
 echo -e "Giving privileges..."
 chown -R www-data:www-data /var/www/*;
 chown -R 755 /var/www/*;
@@ -8,35 +48,39 @@ touch /run/php/php7.3-fpm.pid;
 echo -e "\e[32m[Privileges gived]\e[0m"
 
 if [ ! -f /var/www/html/wp-config.php ]; then
-	echo "[First WordPress configuration]"
+	echo -e "\e[32m[First WordPress configuration]\e[0m"
 
-	echo -e "Obtaining secret keys (WordPress API)..."
-	wp_keys=$(curl -s "https://api.wordpress.org/secret-key/1.1/salt/")
-	echo -e "\e[32m[API Secret keys obtained]\e[0m"
-
-	# Download WordPress
+	echo -e "Downloading WordPress..."
 	mkdir -p /var/www/html
 	cd /var/www/html
 	wp core download 	--allow-root
+	echo -e "\e[32m[WordPress downloaded]\e[0m"
 
-	# Create wp-config.php
-    wp config create	--dbname=$SQL_DATABASE \
-						--dbuser=$SQL_USER \
-						--dbpass=$SQL_PASSWORD \
+	echo -e "Creating wp-config.php..."
+    wp config create	--dbname=${WP_TITLE} \
+						--dbuser=${WP_USER_LOGIN} \
+						--dbpass=${WP_USER_PASSWORD} \
 						--dbhost=mariadb:3306 \
 						--path="/var/www/html" \
 						--dbcharset="utf8" \
 						--dbcollate="utf8_general_ci" \
 						--allow-root
-    wp core install 	--url=$DOMAIN_NAME/wordpress \
-						--title=$SQL_DATABASE \
-						--admin_user=$WP_ADMIN_USER \
-						--admin_password=$WP_ADMIN_PASSWORD \
-						--admin_email=$WP_ADMIN_EMAIL \
+	echo -e "\e[32m[wp-config.php created]\e[0m"
+
+	echo -e "Installing WordPress..."
+	wp core install		--url=${WP_URL} \
+						--title=${WP_TITLE} \
+						--admin_user=${WP_ADMIN_LOGIN} \
+						--admin_password=${WP_ADMIN_PASSWORD} \
+						--admin_email=${WP_ADMIN_EMAIL} \
 						--skip-email \
 						--allow-root
-    # wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root
-    # wp theme install inspiro --activate --allow-root
+	echo -e "\e[32m[WordPress installed]\e[0m"
+
+	echo -e "Creating WordPress user..."
+	wp user create		--allow-root ${WP_USER_LOGIN} ${WP_USER_EMAIL} \
+						--user_pass=${WP_USER_PASSWORD}
+	echo -e "\e[32m[WordPress user created]\e[0m"
 fi
 
 echo -e "\e[32m[WordPress started on :9000]\e[0m"
