@@ -17,7 +17,7 @@ RUN		apt-get install -y php-fpm
 RUN		apt-get install -y php-mysql
 RUN		apt-get install -y mariadb-client
 
-# Install WordPress
+# Install WordPress CLI
 RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN		chmod +x wp-cli.phar
 RUN		cp wp-cli.phar /usr/bin/wp		
