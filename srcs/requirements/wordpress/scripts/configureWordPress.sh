@@ -1,45 +1,5 @@
 #!/bin/bash
 
-# echo -e "Giving privileges..."
-# chown -R www-data:www-data /var/www/*;
-# chown -R 755 /var/www/*;
-# mkdir -p /run/php/;
-# touch /run/php/php7.3-fpm.pid;
-# echo -e "\e[32m[Privileges gived]\e[0m"
-
-# if [ ! -f /var/www/html/wp-config.php ]; then
-# 	echo -e "\e[32m[First WordPress configuration]\e[0m"
-
-# 	# Download WordPress
-# 	mkdir -p /var/www/html
-# 	cd /var/www/html
-# 	wp core download 	--allow-root
-
-# 	# Create wp-config.php
-#     wp config create	--dbname=$WP_TITLE \
-# 						--dbuser=$WP_USER_LOGIN \
-# 						--dbpass=$WP_USER_PASSWORD \
-# 						--dbhost=mariadb:3306 \
-# 						--path="/var/www/html" \
-# 						--dbcharset="utf8" \
-# 						--dbcollate="utf8_general_ci" \
-# 						--allow-root
-#     wp core install 	--url=$DOMAIN_NAME/wordpress \
-# 						--title=$WP_TITLE \
-# 						--admin_user=$WP_ADMIN_USER \
-# 						--admin_password=$WP_ADMIN_PASSWORD \
-# 						--admin_email=$WP_ADMIN_EMAIL \
-# 						--skip-email \
-# 						--allow-root
-#     # wp user create $WP_USR $WP_EMAIL --role=author --user_pass=$WP_PWD --allow-root
-#     # wp theme install inspiro --activate --allow-root
-# fi
-
-# echo -e "\e[32m[WordPress started on :9000]\e[0m"
-
-# exec "$@"
-
-
 echo -e "Giving privileges..."
 chown -R www-data:www-data /var/www/*;
 chown -R 755 /var/www/*;
