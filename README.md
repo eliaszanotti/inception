@@ -12,7 +12,7 @@ Before getting started, ensure that you have the following installed on your sys
 ## Installation
 1. Clone this repository to your local machine:
    ```
-   git clone https://github.com/ezanotti/Inception.git
+   git clone https://github.com/eliaszanotti/Inception.git
    ```
 2. Navigate to the project directory:
    ```
