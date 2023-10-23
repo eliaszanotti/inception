@@ -17,10 +17,10 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	echo -e "\e[32m[WordPress downloaded]\e[0m"
 
 	echo -e "Creating wp-config.php..."
-    wp config create	--dbname=${WP_TITLE} \
-						--dbuser=${WP_USER_LOGIN} \
-						--dbpass=${WP_USER_PASSWORD} \
-						--dbhost=mariadb:3306 \
+    wp config create	--dbname=${SQL_DB_NAME} \
+						--dbuser=${SQL_USER} \
+						--dbpass=${SQL_USER_PASSWORD} \
+						--dbhost=${SQL_DB_HOST} \
 						--path="/var/www/html" \
 						--dbcharset="utf8" \
 						--dbcollate="utf8_general_ci" \
@@ -29,7 +29,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
 	echo -e "Installing WordPress..."
 	wp core install		--url=${WP_URL} \
-						--title=${WP_TITLE} \
+						--title=${SQL_DB_NAME} \
 						--admin_user=${WP_ADMIN_LOGIN} \
 						--admin_password=${WP_ADMIN_PASSWORD} \
 						--admin_email=${WP_ADMIN_EMAIL} \
