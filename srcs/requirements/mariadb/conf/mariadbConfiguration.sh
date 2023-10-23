@@ -13,11 +13,11 @@ if [ ! -d "/var/lib/mysql/$WP_TITLE" ]; then
 	echo -e "mysql_secure_installation..."
 	mysql_secure_installation << EOF
 
-n
-y
-y
-y
-y
+	n
+	y
+	y
+	y
+	y
 EOF
 	echo -e "\e[32m[MySQL Installed]\e[0m"
 
