@@ -25,6 +25,7 @@ Before getting started, ensure that you have the following installed on your sys
 
 > [!NOTE] 
 > You will need root privileges to execute this command
+>
 > If you encounter permission issues, you may need to run the following command as the root user:
 > ```
 > sudo make
