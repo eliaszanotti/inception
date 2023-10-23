@@ -2,7 +2,7 @@
 FROM	debian:buster
 
 # Open port
-EXPOSE		443
+EXPOSE	443
 
 # Install dependencies
 RUN		apt-get update -y
