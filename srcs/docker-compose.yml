@@ -5,6 +5,22 @@ networks:
     name: inception
     driver: bridge
 
+# volumes:
+#   wp:
+#     driver: local
+#     name: wp
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /root/data/wp
+#   db:
+#     driver: local
+#     name: db
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /root/data/db
+
 volumes:
   wp:
     driver: local
@@ -12,14 +28,15 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /root/data/wp
+      device: ${HOME}/data/wordpress
   db:
     driver: local
     name: db
     driver_opts:
       type: none
       o: bind
-      device: /root/data/db
+      device: ${HOME}/data/mariadb
+
 
 services:
   nginx:
