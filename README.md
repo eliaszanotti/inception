@@ -34,5 +34,5 @@ Before getting started, ensure that you have the following installed on your sys
 ## Usage
 Once the containers are up and running, These services are implemented:
 - Nginx Server
-- WordPress: [http://lpupier.42.fr](http://lpupier.42.fr:443)
+- WordPress: [http://ezanotti.42.fr](http://ezanotti.42.fr)
 - MySQL
