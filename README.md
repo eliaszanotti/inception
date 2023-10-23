@@ -23,10 +23,11 @@ Before getting started, ensure that you have the following installed on your sys
    make
    ```
 
-**Note:** If you encounter permission issues, you may need to run the following command with elevated privileges (e.g., using `sudo`):
-```
-sudo make
-```
+> [!NOTE] 
+> If you encounter permission issues, you may need to run the following command with elevated privileges (e.g., using `sudo`):
+> ```
+> sudo make
+> ```
 
 ## Usage
 Once the containers are up and running, These services are implemented:
