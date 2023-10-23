@@ -11,9 +11,9 @@ RUN		apt-get upgrade -y
 RUN		apt-get install -y mariadb-server
 
 # MariaDB configuration
-COPY	conf/mariadb_conf.sh .
-RUN		chmod +x mariadb_conf.sh
+COPY	conf/mariadbConfiguration.sh .
+RUN		chmod +x mariadbConfiguration.sh
 
 # Start
-ENTRYPOINT	["./mariadb_conf.sh"]
+ENTRYPOINT	["./mariadbConfiguration.sh"]
 CMD		["mysqld", "--bind-address=0.0.0.0"]
