@@ -1,6 +1,6 @@
 # Build:	sudo docker build -t wordpress .
 # Run:		sudo docker run -it wordpress
-FROM	debian:buster
+FROM	debian:bullseye
 
 # Expose ports
 EXPOSE	9000
@@ -12,7 +12,7 @@ RUN		apt-get install -y wget
 RUN		apt-get install -y curl
 
 # Install PHP
-RUN		apt-get install -y php7.3
+RUN		apt-get install -y php7.4
 RUN		apt-get install -y php-fpm
 RUN		apt-get install -y php-mysql
 RUN		apt-get install -y mariadb-client
@@ -23,11 +23,11 @@ RUN		chmod +x wp-cli.phar
 RUN		cp wp-cli.phar /usr/bin/wp		
 
 # Configure PHP
-COPY	conf/www.conf /etc/php/7.3/fpm/pool.d
+COPY	conf/www.conf /etc/php/7.4/fpm/pool.d
 
 # WordPress configuration
 COPY	scripts/configureWordPress.sh .
 RUN		chmod +x configureWordPress.sh
 ENTRYPOINT ["./configureWordPress.sh"]
 
-CMD		["/usr/sbin/php-fpm7.3", "--nodaemonize"]
+CMD		["/usr/sbin/php-fpm7.4", "--nodaemonize"]

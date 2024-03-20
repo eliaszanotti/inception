@@ -1,5 +1,5 @@
 # Version
-FROM	debian:buster
+FROM	debian:bullseye
 
 # Open port
 EXPOSE	443
