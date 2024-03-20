@@ -4,7 +4,7 @@ echo -e "Giving privileges..."
 chown -R www-data:www-data /var/www/*;
 chown -R 755 /var/www/*;
 mkdir -p /run/php/;
-touch /run/php/php7.3-fpm.pid;
+touch /run/php/php7.4-fpm.pid;
 echo -e "\e[32m[Privileges gived]\e[0m"
 
 if [ ! -f /var/www/html/wp-config.php ]; then
