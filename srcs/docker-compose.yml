@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 networks:
   inception:
@@ -43,6 +43,11 @@ services:
     build:
       context: requirements/mariadb
       dockerfile: Dockerfile
+      args:
+        - SQL_DB_NAME=$SQL_DB_NAME
+        - SQL_USER=$SQL_USER
+        - SQL_USER_PASSWORD=$SQL_USER_PASSWORD
+        - SQL_ROOT_PASSWORD=$SQL_ROOT_PASSWORD
     env_file: .env
     volumes: 
       - db:/var/lib/mysql
