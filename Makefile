@@ -4,6 +4,7 @@ up:
 	@mkdir -p ${HOME}/data
 	@mkdir -p ${HOME}/data/wordpress
 	@mkdir -p ${HOME}/data/mariadb
+	@sed -i '/127.0.0.1 ezanotti.42.fr/d' /etc/hosts
 	@sudo sh -c 'echo "127.0.0.1 ezanotti.42.fr" >> /etc/hosts && echo "successfully added ezanotti.42.fr to /etc/hosts"'
 	@docker compose -f ./srcs/docker-compose.yml up --detach
 
